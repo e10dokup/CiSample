@@ -1,0 +1,54 @@
+name: Run ktLint
+
+on:
+  pull_request:
+    branches:
+      - master
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  run_ktlint:
+    runs-on: ubuntu-latest
+    env:
+      JVM_OPTS: '-Xmx2048m -Xms512m'
+      GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError -XX:MaxMetaspaceSize=1g -XX:+UseParallelGC" -Dorg.gradle.daemon=false'
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - name: Setup ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.6.10'
+      - name: set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+      - uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Install danger
+        run: |
+          gem install bundler
+          bundle install
+      - name: Run ktLint
+        run: |
+          ./gradlew ktlint --no-daemon
+      - name: Copy ktLint Result
+        if: always()
+        run: |
+          mkdir -p ./ktlint
+          find . -type f -regex ".*/build/reports/ktlint/.*xml" | xargs -r cp --parents --target-directory=./ktlint
+      - name: Run danger
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: danger --danger_id=ktlint
