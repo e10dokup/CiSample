@@ -16,22 +16,16 @@
 
 package dev.dokup.cisample.data
 
-import androidx.test.core.app.ActivityScenario.launch
-import app.cash.turbine.test
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runTest
-import org.junit.Assert.assertEquals
-import org.junit.Test
 import dev.dokup.cisample.data.local.database.Legend
 import dev.dokup.cisample.data.local.database.LegendDao
 import dev.dokup.cisample.data.remote.api.TakadaLegendResponse
 import dev.dokup.cisample.data.remote.api.TakadaLegendsApi
 import dev.dokup.cisample.data.remote.api.misc.Future
-import dev.dokup.cisample.data.remote.api.misc.apiFlow
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
+import org.junit.Test
 import retrofit2.Response
 
 /**
@@ -51,7 +45,7 @@ class DefaultLegendRepositoryTest {
         val features = mutableListOf<Future<TakadaLegendResponse>>()
         repository.fetchLegend.toCollection(features)
 
-        assertEquals(2, features.size)
+        assertEquals(3, features.size)
         assertEquals(true, features[0] is Future.Proceeding)
         assertEquals(true, features[1] is Future.Success)
 
