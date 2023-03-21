@@ -1,4 +1,4 @@
-name: Build debug application
+name: Run test
 
 on:
   pull_request:
@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  run_test:
     runs-on: ubuntu-latest
     env:
       JVM_OPTS: '-Xmx2048m -Xms512m'
@@ -47,4 +47,4 @@ jobs:
         if: always()
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: danger --danger_id=testAffectedModules
+        run: danger --danger_id=test
