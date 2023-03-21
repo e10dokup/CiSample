@@ -35,6 +35,10 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+      - name: Install danger
+        run: |
+          gem install bundler
+          bundle install
       - name: Run Test
         run: ./gradlew test --stacktrace
       - name: Copy Test Result
