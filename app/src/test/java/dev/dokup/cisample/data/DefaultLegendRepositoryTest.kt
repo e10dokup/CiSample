@@ -45,7 +45,7 @@ class DefaultLegendRepositoryTest {
         val features = mutableListOf<Future<TakadaLegendResponse>>()
         repository.fetchLegend.toCollection(features)
 
-        assertEquals(3, features.size)
+        assertEquals(2, features.size)
         assertEquals(true, features[0] is Future.Proceeding)
         assertEquals(true, features[1] is Future.Success)
 
