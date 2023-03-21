@@ -25,6 +25,8 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import dev.dokup.cisample.data.LegendRepository
+import dev.dokup.cisample.data.remote.api.TakadaLegendResponse
+import dev.dokup.cisample.data.remote.api.misc.Future
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -56,4 +58,7 @@ private class FakeLegendRepository : LegendRepository {
     override suspend fun add(name: String) {
         data.add(0, name)
     }
+
+    override val fetchLegend: Flow<Future<TakadaLegendResponse>>
+        get() = TODO("Not yet implemented")
 }
