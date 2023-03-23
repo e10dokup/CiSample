@@ -46,7 +46,7 @@ jobs:
         if: always()
         run: |
           mkdir -p ./ktlint
-          find . -type f -regex ".*/build/reports/ktlint/.*xml" | xargs -r cp --parents --target-directory=./ktlint
+          find . -type f -regex ".*/build/reports/ktlint/*/.*txt" | xargs -r cp --parents --target-directory=./ktlint
       - name: Run danger
         if: always()
         env:
