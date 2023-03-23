@@ -41,7 +41,7 @@ jobs:
           bundle install
       - name: Run lint
         run: |
-          ./gradlew lint --no-daemon
+          ./gradlew lintDebug --no-daemon
       - name: Copy Lint Result
         if: always()
         run: |
