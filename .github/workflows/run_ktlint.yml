@@ -41,7 +41,7 @@ jobs:
           bundle install
       - name: Run ktLint
         run: |
-          ./gradlew ktlint --no-daemon
+          ./gradlew ktlintCheck --no-daemon
       - name: Copy ktLint Result
         if: always()
         run: |
