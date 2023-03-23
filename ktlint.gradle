@@ -1,0 +1,11 @@
+apply plugin: "org.jlleitschuh.gradle.ktlint"
+
+ktlint {
+    version = Libs.ktlint.split(":")[2]
+    android = true
+    outputToConsole = true
+    reporters {
+        reporter "checkstyle"
+    }
+    ignoreFailures = true
+}
