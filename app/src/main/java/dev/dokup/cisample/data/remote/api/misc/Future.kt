@@ -15,6 +15,8 @@ sealed class Future<out T> {
     data class Success<out T>(val value: T) : Future<T>()
 
     data class Error(val error: Throwable) : Future<Nothing>()
+
+
 }
 
 inline fun <reified T : Any> apiFlow(crossinline call: suspend () -> Response<T>): Flow<Future<T>> =
