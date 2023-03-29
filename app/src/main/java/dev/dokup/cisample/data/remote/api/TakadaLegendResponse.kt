@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class TakadaLegendResponse(
-  @SerialName("No") val no: Int,
-  @SerialName("text") val text: String
+    @SerialName("No") val no: Int,
+    @SerialName("text") val text: String
 )

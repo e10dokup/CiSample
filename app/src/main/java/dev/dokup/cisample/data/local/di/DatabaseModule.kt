@@ -27,7 +27,6 @@ import dev.dokup.cisample.data.local.database.AppDatabase
 import dev.dokup.cisample.data.local.database.LegendDao
 import javax.inject.Singleton
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 class DatabaseModule {

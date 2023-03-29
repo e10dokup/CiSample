@@ -16,8 +16,6 @@
 
 package dev.dokup.cisample.data
 
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import dev.dokup.cisample.data.local.database.Legend
 import dev.dokup.cisample.data.local.database.LegendDao
 import dev.dokup.cisample.data.remote.api.TakadaLegendResponse
@@ -25,6 +23,8 @@ import dev.dokup.cisample.data.remote.api.TakadaLegendsApi
 import dev.dokup.cisample.data.remote.api.misc.Future
 import dev.dokup.cisample.data.remote.api.misc.apiFlow
 import javax.inject.Inject
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 interface LegendRepository {
     val fetchLegend: Flow<Future<TakadaLegendResponse>>
