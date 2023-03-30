@@ -20,13 +20,10 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import dev.dokup.cisample.data.LegendRepository
 import dev.dokup.cisample.data.remote.api.misc.Future
-import dev.dokup.cisample.ui.legend.LegendUiState.Error
-import dev.dokup.cisample.ui.legend.LegendUiState.Loading
-import dev.dokup.cisample.ui.legend.LegendUiState.Success
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -34,23 +31,27 @@ class LegendViewModel @Inject constructor(
     private val legendRepository: LegendRepository
 ) : ViewModel() {
 
-    val uiState: MutableStateFlow<LegendUiState> = MutableStateFlow(Loading)
+    val uiState: MutableStateFlow<LegendUiState> = MutableStateFlow(LegendUiState.Loading)
 
     fun fetchLegend() {
         viewModelScope.launch {
             legendRepository.fetchLegend.collect { result ->
                 when (result) {
                     is Future.Proceeding -> {
-                        uiState.value = Loading
+                        uiState.value = LegendUiState.Loading
                     }
                     is Future.Success -> {
-                        uiState.value = Success(
+                        uiState.value = LegendUiState.Success(
                             result.value.text
                         )
                     }
                     is Future.Error -> {
-                        Log.e("LegendViewModel", "Error on LegendViewModel::fetchLegend", result.error)
-                        uiState.value = Error(
+                        Log.e(
+                            "LegendViewModel",
+                            "Error on LegendViewModel::fetchLegend",
+                            result.error
+                        )
+                        uiState.value = LegendUiState.Error(
                             result.error
                         )
                     }

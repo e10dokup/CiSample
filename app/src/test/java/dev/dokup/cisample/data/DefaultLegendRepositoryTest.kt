@@ -22,7 +22,9 @@ import dev.dokup.cisample.data.remote.api.TakadaLegendResponse
 import dev.dokup.cisample.data.remote.api.TakadaLegendsApi
 import dev.dokup.cisample.data.remote.api.misc.Future
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.toCollection
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -55,11 +57,10 @@ class DefaultLegendRepositoryTest {
                 ある意地の悪い華族が高田健志を自宅に招き、「1時間私を楽しませてみせよ」と大きな砂時計を逆さにした。
                 もちろん平民の話を最後まで聞くつもりなど彼にはなく、頃合いを見て追い返してやるつもりであった。
                 そろそろ5分経ったと見た彼は「つまらん」と立ち上がった。砂はすっかり落ち切っていた。
-            """.trimIndent()
+        """.trimIndent()
         assertEquals(expectedNo, succeededResult.value.no)
         assertEquals(expectedText, succeededResult.value.text)
     }
-
 }
 
 private class FakeLegendDao : LegendDao {
@@ -85,6 +86,7 @@ private class FakeLegendApi : TakadaLegendsApi {
             そろそろ5分経ったと見た彼は「つまらん」と立ち上がった。砂はすっかり落ち切っていた。
         """.trimIndent()
     )
+
     override suspend fun getRandomLegend(): Response<TakadaLegendResponse> {
         return Response.success(response)
     }

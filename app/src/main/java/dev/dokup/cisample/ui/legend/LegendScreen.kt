@@ -16,12 +16,17 @@
 
 package dev.dokup.cisample.ui.legend
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,7 +35,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle.State.STARTED
 import androidx.lifecycle.repeatOnLifecycle
 import dev.dokup.cisample.ui.theme.MyApplicationTheme
-import androidx.compose.ui.Alignment
 
 @Composable
 fun LegendScreen(modifier: Modifier = Modifier, viewModel: LegendViewModel = hiltViewModel()) {
@@ -72,9 +76,10 @@ internal fun LegendScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
-            onClick = { onFetchLegend() }) {
-                Text("Fetch new Takada's Legend")
-            }
+            onClick = { onFetchLegend() }
+        ) {
+            Text("Fetch new Takada's Legend")
+        }
         Spacer(modifier = Modifier.height(16.dp))
         Text(
             modifier = Modifier.fillMaxWidth()
@@ -87,7 +92,8 @@ internal fun LegendScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
-            onClick = { onSave(item) }) {
+            onClick = { onSave(item) }
+        ) {
             Text("Save the Takada's Legend")
         }
     }

@@ -20,9 +20,9 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import dev.dokup.cisample.data.di.fakeLegends
 import org.junit.Rule
 import org.junit.Test
-import dev.dokup.cisample.data.di.fakeLegends
 
 @HiltAndroidTest
 class NavigationTest {
@@ -39,4 +39,3 @@ class NavigationTest {
         composeTestRule.onNodeWithText(fakeLegends.first(), substring = true).assertExists()
     }
 }
-
