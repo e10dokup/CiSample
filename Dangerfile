@@ -1,5 +1,3 @@
-github.dismiss_out_of_range_messages
-
 # ktlint
 checkstyle_format.base_path = Dir.pwd
 Dir.glob("./ktlint/**/ktlint*.xml").each { |report|
