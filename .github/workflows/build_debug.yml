@@ -13,7 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      JVM_OPTS: '-Xmx2048m -Xms512m -XX:+HeapDumpOnOutOfMemoryError -XX:+UseParallelGC'
+      JVM_OPTS: '-Xmx5120m -Xms512m -XX:+HeapDumpOnOutOfMemoryError -XX:+UseParallelGC'
       GRADLE_OPTS: '-Dorg.gradle.daemon=false -Dkotlin.incremental=false -Dkotlin.compiler.execution.strategy=in-process'
     steps:
       - uses: actions/checkout@v2
